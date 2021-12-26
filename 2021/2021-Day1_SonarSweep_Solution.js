@@ -2042,3 +2042,6 @@ parsedInput = inputParse(input)
 
 console.log(partOne(parsedInput))
 console.log(partTwo(parsedInput))
+
+/* Part 1: Your puzzle answer was 1393.
+Part 2: Your puzzle answer was 1359. */

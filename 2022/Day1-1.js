@@ -1,23 +1,23 @@
-const readFileSync = require("fs").readFileSync;
-var input = readFileSync("./Day1-1.txt", {
-  encoding: "utf8",
-  flag: "r",
-}).trim();
+const path = require("path");
+const fs = require("fs");
 
-let splitInput = input.split("\n");
+const input = fs
+  .readFileSync(path.join(__dirname, "Day1-1.txt"), "utf8")
+  .toString()
+  .trim()
+  .split("\n\n");
 
-function CalorieCounter(splitInput) {
-  let sum = 0;
-  let greatestNumber = 0;
-  for (let i = 0; i < splitInput.length; ++i) {
-    if (Boolean(splitInput[i]) === true) {
-      sum += splitInput[i] * 1;
-    } else if (Boolean(splitInput[i]) === false) {
-      greatestNumber = Math.max(sum, greatestNumber);
-      sum = 0;
-    }
-  }
-  return [sum, greatestNumber];
-}
+const sumsSorted = input
+  .map((elf) => {
+    return elf
+      .split("\n")
+      .map((item) => parseInt(item, 10))
+      .reduce((sum, v) => sum + v, 0);
+  })
+  .sort((a, z) => z - a);
 
-console.log(CalorieCounter(splitInput));
+console.log("Part One:", sumsSorted[0]);
+console.log(
+  "Part Two:",
+  sumsSorted.slice(0, 3).reduce((sum, v) => sum + v, 0)
+);
